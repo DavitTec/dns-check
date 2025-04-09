@@ -1,0 +1,10 @@
+Tree Structure:
+----------------
+/opt/davit/
+/opt/davit/bin/ # Executables
+/opt/davit/lib/ # Shared code
+/opt/davit/lib/python/ # Py3 libs (mss, pillow)
+/opt/davit/config/ # Rules and policies
+/opt/davit/dev/ # WIP dev subdir
+/opt/davit/dev/overlay/ # Overlay project
+/opt/davit/dev/fileit/ # FILEit dev

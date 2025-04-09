@@ -1,0 +1,10 @@
+dns
+ns
+ns1
+ns2
+www 
+test 
+dev 
+mail 
+rdp 
+remote

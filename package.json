@@ -1,0 +1,30 @@
+{
+  "name": "dns-check",
+  "version": "0.0.8",
+  "description": "A test testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "./test/test_dns-check.sh",
+    "release": "standard-version && ./update-version.sh",
+    "prelease": "standard-version --prerelease"
+  },
+  "keywords": [
+    "bash",
+    "nodejs",
+    "html"
+  ],
+  "author": "David Mullins",
+  "license": "https://github.com/DavitTec/dns-check/blob/master/LICENSE",
+  "packageManager": "pnpm@10.7.1",
+  "site": "davit.ie",
+  "private": true,
+  "bugs": "url: https://github.com/DavitTec/dns-check/issues",
+  "homepage": "https://github.com/DavitTec/dns-check#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavitTec/dns-check.git"
+  },
+  "devDependencies": {
+    "standard-version": "^9.5.0"
+  }
+}
