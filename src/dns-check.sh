@@ -1,6 +1,6 @@
 #!/bin/bash
 # dns-check.sh - Check DNS resolution for a domain and its subdomains
-# Version: 0.0.10
+# Version: 0.0.11
 # Created: 2025-04-01
 # Updated: 2025-04-09
 # Author: David

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # TESTING SCRIPT FOR DNS CHECK
 # test_dns-check.sh
-version=0.0.10
+version=0.0.11
 
 # Setup logs directory
 logs="/opt/davit/development/dns-check/logs"
