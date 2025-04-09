@@ -4,7 +4,7 @@
 version=0.0.3
 
 # Setup logs directory
-logs="/opt/davit/test/logs"
+logs="logs"
 if [ ! -d "$logs" ]; then
   mkdir -p "$logs"
 fi
