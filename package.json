@@ -1,6 +1,6 @@
 {
   "name": "dns-check",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A test testing",
   "main": "index.js",
   "scripts": {
