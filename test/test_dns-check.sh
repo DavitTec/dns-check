@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # TESTING SCRIPT FOR DNS CHECK
 # test_dns-check.sh
-version=0.0.3
+version=0.0.4
 
 # Setup logs directory
 logs="logs"
@@ -52,12 +52,31 @@ echo "Test DNS Check"
     echo "TEST $test_name"
     echo "dns-check.sh $cmd"
     echo "-------------------------------------------"
-    # Run command, redirect output to temp file, show spinner in terminal
+    local args=($cmd)
+    if [ ${#args[@]} -eq 0 ]; then
+      total=$((${#default_subdomains[@]} + 1))
+    elif [ ${#args[@]} -eq 1 ]; then
+      total=$((${#default_subdomains[@]} + 1))
+    elif [ ${#args[@]} -ge 2 ]; then
+      if [ -f "${args[1]}" ]; then
+        total=$(wc -l <"${args[1]}")
+        ((total++))
+      else
+        total=2
+      fi
+    fi
     dns-check.sh $cmd >"$tmpfile" 2>/dev/null &
     pid=$!
-    spinner $pid
-    wait $pid
-    # Append temp file content to log without spinner
+    local count=0
+    while [ "$(ps a | awk '{print $1}' | grep -w $pid)" ]; do
+      count=$(grep -c "has address\|not found" "$tmpfile" || echo 0)
+      printf "Checking %d/%d [%c]  " "$count" "$total" "$spinstr" >&2
+      local temp=${spinstr#?}
+      spinstr=$temp${spinstr%"$temp"}
+      sleep 0.1
+      printf "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b" >&2
+    done
+    printf "                \b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b" >&2
     cat "$tmpfile"
     echo " "
     rm -f "$tmpfile"
