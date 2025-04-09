@@ -22,10 +22,10 @@ if [ ! -f "$logfile" ]; then
   touch "$logfile"
 fi
 
-bin="../src"
+bin="./src"
 target="dns-check.sh"
-targetv=$(grep "# Version" "$bin/$target" 2>/dev/null | head -n 1 | sed 's/.*Version: \([0-9.]*\).*/\1/' || echo "unknown")
-version="0.0.5"
+targetv=$(grep "# Version:" "$bin/$target" 2>/dev/null | head -n 1 | sed 's/.*Version: \([0-9.]*\).*/\1/' || echo "unknown")
+version=$targetv
 
 # Simple spinner function (terminal only)
 spinner() {
@@ -85,9 +85,9 @@ echo "Test DNS Check"
   echo " "
 
   echo "==================================================="
-  echo "done: review logs at file://$logs/test_dns-check.log"
+  echo "done: review logs at file://$PWD/$logs/test_dns-check.log"
 } >"$logfile"
 
-echo "done: review logs at file://$logs/test_dns-check.log"
+echo "done: review logs here at file://$PWD/$logs/test_dns-check.log"
 exit 0
-#end 
+#end
