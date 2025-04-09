@@ -1,0 +1,13 @@
+name: Test dns-check
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: |
+          chmod +x src/dns-check.sh tests/test_dns-check.sh
+          ./tests/test_dns-check.sh
+
+          
