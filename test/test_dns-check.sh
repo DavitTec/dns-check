@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # TESTING SCRIPT FOR DNS CHECK
 # test_dns-check.sh
-# version 0.0.5
+version=0.0.10
 
 # Setup logs directory
 logs="/opt/davit/development/dns-check/logs"
@@ -40,7 +40,7 @@ echo "Test DNS Check"
   echo "==================================================="
   echo "# TEST SCRIPT FOR DNS CHECK"
   echo "Located at: # $bin/$target version: $targetv"
-  echo "# $0 version: 0.0.5"
+  echo "# $0 version: $version"
 
   echo "using $(basename "$0") with tests"
 

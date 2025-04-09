@@ -1,6 +1,6 @@
 #!/bin/bash
 # dns-check.sh - Check DNS resolution for a domain and its subdomains
-# Version: 0.0.9
+# Version: 0.0.10
 # Created: 2025-04-01
 # Updated: 2025-04-09
 # Author: David
@@ -22,7 +22,7 @@ default_subdomains=(www dns ns ns1 mail est dev rdp remote)
 
 # Initialize counters for summary
 success_count=0
-failure_count=0
+not_found_count=0
 
 # Parse options
 VERBOSE=0
@@ -74,14 +74,9 @@ elif [ $# -eq 2 ]; then
     [ $VERBOSE -eq 1 ] && echo "Using provided domain: $domain"
     [ $VERBOSE -eq 1 ] && echo "Using subdomains from file: $2"
   else
-    if [ -r "$2" ]; then
-      echo "Error: '$2' exists but is not readable."
-      exit 1
-    else
-      subdomains=("$2")
-      [ $VERBOSE -eq 1 ] && echo "Using provided domain: $domain"
-      [ $VERBOSE -eq 1 ] && echo "Using provided subdomain: $2"
-    fi
+    subdomains=("$2")
+    [ $VERBOSE -eq 1 ] && echo "Using provided domain: $domain"
+    [ $VERBOSE -eq 1 ] && echo "Using provided subdomain: $2"
   fi
 else
   echo "Usage: $0 [-v] [-l logfile] [-h] [domain] [wordlist or subdomain]"
@@ -104,13 +99,13 @@ if [ $? -eq 0 ]; then
     log_message "SUCCESS: $address_line"
     ((success_count++))
   else
-    log_message "FAILURE: No address found for $domain"
-    ((failure_count++))
+    log_message "NOT FOUND: No address for $domain"
+    ((not_found_count++))
   fi
 else
   echo "Error: DNS resolution failed for $domain"
   log_message "ERROR: DNS resolution failed for $domain"
-  ((failure_count++))
+  ((not_found_count++))
 fi
 
 # Check each subdomain
@@ -127,8 +122,8 @@ for sub in "${subdomains[@]}"; do
           log_message "SUCCESS: $result (alias)"
           ((success_count++))
         else
-          log_message "FAILURE: No address found for alias $full_domain"
-          ((failure_count++))
+          log_message "NOT FOUND: No address for alias $full_domain"
+          ((not_found_count++))
         fi
       else
         address_line=$(echo "$host_output" | grep "has address" | head -n 1)
@@ -137,20 +132,20 @@ for sub in "${subdomains[@]}"; do
           log_message "SUCCESS: $address_line"
           ((success_count++))
         else
-          log_message "FAILURE: No address found for $full_domain"
-          ((failure_count++))
+          log_message "NOT FOUND: No address for $full_domain"
+          ((not_found_count++))
         fi
       fi
     else
-      [ $VERBOSE -eq 1 ] && echo "DNS resolution failed for $full_domain"
-      log_message "ERROR: DNS resolution failed for $full_domain"
-      ((failure_count++))
+      [ $VERBOSE -eq 1 ] && echo "DNS resolution not found for $full_domain"
+      log_message "NOT FOUND: DNS resolution not found for $full_domain"
+      ((not_found_count++))
     fi
   fi
 done
 
-# Print summary
-echo "Summary: $success_count successful, $failure_count failed"
-log_message "Summary: $success_count successful, $failure_count failed"
+echo "Summary: $success_count successful, $not_found_count not found"
+log_message "Summary: $success_count successful, $not_found_count not found"
 
 exit 0
+# end of script
