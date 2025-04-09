@@ -69,20 +69,19 @@ elif [ $# -eq 1 ]; then
 elif [ $# -eq 2 ]; then
   # Option 3: Two arguments (domain and either a file or a single subdomain)
   domain="$1"
-  if [ -f "$2" ]; then
-    if [ -r "$2" ]; then
-      mapfile -t subdomains <"$2"
-      # Always print these messages when -v is used
-      [ $VERBOSE -eq 1 ] && echo "Using provided domain: $domain"
-      [ $VERBOSE -eq 1 ] && echo "Using subdomains from file: $2"
-    else
-      echo "Error: File '$2' is not readable."
-      exit 1
-    fi
-  else
-    subdomains=("$2")
+  if [ -f "$2" ] && [ -r "$2" ]; then
+    mapfile -t subdomains <"$2"
     [ $VERBOSE -eq 1 ] && echo "Using provided domain: $domain"
-    [ $VERBOSE -eq 1 ] && echo "Using provided subdomain: $2"
+    [ $VERBOSE -eq 1 ] && echo "Using subdomains from file: $2"
+  else
+    if [ -r "$2" ]; then
+      echo "Error: '$2' exists but is not readable."
+      exit 1
+    else
+      subdomains=("$2")
+      [ $VERBOSE -eq 1 ] && echo "Using provided domain: $domain"
+      [ $VERBOSE -eq 1 ] && echo "Using provided subdomain: $2"
+    fi
   fi
 else
   echo "Usage: $0 [-v] [-l logfile] [-h] [domain] [wordlist or subdomain]"
