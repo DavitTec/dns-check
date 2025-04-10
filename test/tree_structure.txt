@@ -1,10 +1,21 @@
 Tree Structure:
 ----------------
-/opt/davit/
-/opt/davit/bin/ # Executables
-/opt/davit/lib/ # Shared code
-/opt/davit/lib/python/ # Py3 libs (mss, pillow)
-/opt/davit/config/ # Rules and policies
-/opt/davit/dev/ # WIP dev subdir
-/opt/davit/dev/overlay/ # Overlay project
-/opt/davit/dev/fileit/ # FILEit dev
+/dns-check
+├── CHANGELOG.md
+├── INSTALL
+├── logs
+│   ├── test_dns-check.log
+│   └── test_google.com.log
+├── node_modules
+│   └── standard-version -> .pnpm/standard-version@9.5.0/node_modules/standard-version
+├── package.json
+├── pnpm-lock.yaml
+├── README.md
+├── setup_package.sh
+├── src
+│   └── dns-check.sh
+├── test
+│   ├── test_dns-check.sh
+│   ├── test_dns-check-subdomains.txt
+│   └── tree_structure.txt
+└── update-version.sh
