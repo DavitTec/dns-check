@@ -17,7 +17,7 @@
 # Usage: ./dns-check.sh [-v] [-l logfile] [-h] [domain] [wordlist or subdomain]
 
 # Define default domain and subdomains
-default_domain="davit.ie"
+default_domain="github.com"
 default_subdomains=(www dns ns ns1 mail est dev rdp remote)
 
 # Initialize counters for summary

@@ -1,5 +1,4 @@
 #!/bin/bash
-# TESTING SCRIPT FOR DNS CHECK
 # test_dns-check.sh - Test suite for dns-check.sh
 # Version: 0.0.11
 # Created: 2025-04-01
@@ -8,8 +7,9 @@
 # Contact: david@davit.ie
 # Description:
 #   Runs a series of tests for dns-check.sh, logging results and displaying progress.
+#
 # Usage: test_dns-check.sh
-# Manpage: https://davit.ie/docs/dns-check#testing
+# Manpage: https://davit.ie/docs/dns-check/README.md#testing
 # License: MIT
 
 # Setup logs directory
